@@ -1,0 +1,114 @@
+:root {
+    --gray-100: #262626;
+    --gray-80: #515151;
+    --secondary: #DAA25A;
+    --accent: #59ABD9;
+}
+
+html {
+    font-size: 16px;
+    font-family: 'Quicksand', sans-serif;
+    line-height: 1.2;
+}
+
+body {
+    color: var(--gray-100);
+}
+
+p,
+a {
+    letter-spacing: -0.32px;
+}
+
+h1 {
+    font-size: 5.625rem;
+    text-align: center;
+    font-weight: 700;
+    letter-spacing: -3.6px;
+}
+
+.button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 700;
+    transition: .2s ease-in-out;
+}
+
+.button:hover {
+    gap: 1rem;
+    color: var(--gray-100);
+}
+
+.button:hover svg {
+    fill: var(--gray-100);
+}
+
+.button svg {
+    fill: var(--accent);
+    transition: fill .2s ease-in-out;
+}
+
+#our-work {
+    color: var(--gray-80);
+    text-align: center;
+}
+
+#our-work svg {
+    fill: var(--gray-80);
+}
+
+#our-work p {
+    margin-bottom: .5rem;
+}
+
+#hero {
+    display: flex;
+    flex-direction: column;
+    height: 100dvh;
+    justify-content: space-between;
+    padding: 4rem;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header-side-content {
+    flex: 1;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.header-side-content:last-child {
+    justify-content: flex-end;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+nav a {
+    text-decoration: none;
+    color: var(--gray-100);
+    transition: color .2s ease-in-out;
+}
+
+nav a:hover {
+    color: var(--secondary);
+}
+
+h1 span {
+    color: var(--secondary);
+}
