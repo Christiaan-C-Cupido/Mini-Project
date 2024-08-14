@@ -67,12 +67,12 @@
 			const newX = ((event.clientX - boundBox.left)/magneto.offsetWidth) - 0.5
 			const newY = ((event.clientY - boundBox.top)/magneto.offsetHeight) - 0.5
 
-			// Just for debugging purposes
+			/* Just for debugging purposes
 			dbgr.innerHTML = 'cursorX: ' + event.clientX
 			                + '<br>boxLeft: ' + Math.ceil(boundBox.left)
 							+ '<br>cursorInsideButton: ' + Math.ceil(event.clientX - boundBox.left)
 							+ '<br>relativeToTotalWidth: ' + ((event.clientX - boundBox.left)/magneto.offsetWidth).toFixed(2)
-							+ '<br>shifted: ' + ((event.clientX - boundBox.left)/magneto.offsetWidth - 0.5).toFixed(2)
+							+ '<br>shifted: ' + ((event.clientX - boundBox.left)/magneto.offsetWidth - 0.5).toFixed(2)*/
 			
 		// Move the button to its new position
 		gsap.to(magneto, {
@@ -93,6 +93,21 @@
 
 		//Mouse leave stuff
 		const resetMagneto = (event) => {
+		// Move the button to its default position
+		gsap.to(magneto, {
+			duration: 1,
+			x: 0,
+			y: 0,
+			ease: Elastic.easeOut
+		})
+
+		// Move the button text to its default position
+		gsap.to(magnetoText, {
+			duration: 1,
+			x: 0,
+			y: 0,
+			ease: Elastic.easeOut
+		})
 
 		} 
 
