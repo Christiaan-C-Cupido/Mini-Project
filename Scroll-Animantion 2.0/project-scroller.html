@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scroll to Fade</title>
+    
+    <style>
+    body, html {
+        height: 100%;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        opacity: 1;
+        transition: opacity 1s ease; /* Fade in the page on load */
+    }
+
+    #content {
+        padding: 20px;
+        min-height: 200vh; /* Make the page scrollable */
+    }
+
+    #fade {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: black;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 1s ease;
+    }
+
+    #progressBarContainer {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        background-color: #f3f3f3; /* Light gray background */
+        z-index: 100; /* Ensure it stays on top */
+    }
+
+    #progressBar {
+        height: 100%;
+        width: 0%;
+        background-color: #bd9a50; /* Green progress bar */
+        transition: width 0.1s ease; /* Smooth transition */
+    }
+
+    </style>
+</head>
+<body>
+    <!-- Progress Bar -->
+    <div id="progressBarContainer">
+        <div id="progressBar"></div>
+    </div>
+
+    <!-- Your content goes here -->
+    <div id="content" style="text-align: center;">
+        <p>Scroll to the bottom to see the effect...</p>
+        <!-- Add more content to make the page scrollable -->
+        <h1>Content</h1>
+        <h1>Content</h1>
+        <h1>Content</h1>
+        <h1>Content</h1>
+        <h1>Content</h1>
+        <h1>Content</h1>
+        <h1>Content</h1>
+        <h1>Content</h1>
+        <h1>Content</h1>
+        <h1>Content</h1>
+        <h1>Content</h1>
+        <h1>Content</h1>
+        <h1>Content</h1>
+        <h1>Content</h1>
+        <h1>Content</h1>
+        <h1>Content</h1>
+        <h1>Content</h1>
+        <h1>Content</h1>
+        <h1>Content</h1>
+        <h1>Content</h1>
+
+        
+        <!-- Repeated Headers to Create Scrollable Content -->
+        <h1>Header</h1>
+        <!-- More Headers... -->
+    </div>
+
+    <!-- The fade effect div -->
+    <div id="fade"></div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/gh/studio-freight/lenis@1.0.27/bundled/lenis.min.js"></script>
+    <script>
+        //Lenis smooth scrolling
+		const lenis = new Lenis()
+
+        lenis.on('scroll', (e) => {
+            console.log(e)
+        })
+
+        lenis.on('scroll', ScrollTrigger.update)
+        gsap.ticker.add((time)=>{
+            lenis.raf(time * 1000)
+        })
+        gsap.ticker.lagSmoothing(0)
+
+
+
+//===================================================================================================================
+        let hasFaded = false; // Track whether the fade effect has already been triggered
+
+        window.addEventListener('load', function() {
+            // Fade in the page on load
+            document.body.style.opacity = 1;
+        });
+
+        window.addEventListener('scroll', function() {
+            // Calculate the total scrollable height of the document
+            var documentHeight = document.documentElement.scrollHeight - window.innerHeight;
+            
+            // Calculate how much the user has scrolled
+            var scrollTop = window.scrollY;
+            
+            // Calculate the scroll percentage
+            var scrollPercentage = (scrollTop / documentHeight) * 100;
+
+            // Set the width of the progress bar
+            document.getElementById('progressBar').style.width = scrollPercentage + '%';
+
+            // Check if the user has scrolled to the bottom
+            if (window.innerHeight + scrollTop >= document.documentElement.scrollHeight) {
+                if (!hasFaded) {
+                    hasFaded = true; // Set flag to prevent multiple triggers
+                    // Trigger the fade out effect
+                    document.getElementById('fade').style.opacity = 1;
+
+                    // After the fade-out, redirect to a new page
+                    setTimeout(function() {
+                        document.body.style.opacity = 0;
+
+                        // Wait for the fade-out to complete before redirecting
+                        setTimeout(function() {
+                            window.location.href = 'http://127.0.0.1:5500/projects.html'; // Replace with your new page URL
+                        }, 1000); // 1-second fade-out duration
+                    }, 1000); // 1-second delay before redirecting to allow for the fade-in effect
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>
